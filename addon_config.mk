@@ -24,7 +24,7 @@ meta:
 common:
 	# dependencies with other addons, a list of them separated by spaces 
 	# or use += in several lines
-	# ADDON_DEPENDENCIES =
+	ADDON_DEPENDENCIES = ofxOpenCv
 	
 	# include search paths, this will be usually parsed from the file system
 	# but if the addon or addon libraries need special search paths they can be
@@ -66,7 +66,7 @@ common:
 	
 	# when parsing the file system looking for include paths exclude this for all or
 	# a specific platform
-    # ADDON_INCLUDES_EXCLUDE =
+	# ADDON_INCLUDES_EXCLUDE =
 	
 linux64:
 	# linux only, any library that should be included in the project using
@@ -80,7 +80,7 @@ linux64:
 	
 	# when parsing the file system looking for include paths exclude this for all or
 	# a specific platform
-    	# ADDON_INCLUDES_EXCLUDE = libs/libfreenect/platform/%
+	# ADDON_INCLUDES_EXCLUDE = libs/libfreenect/platform/%
 	
 linux:
 	# linux only, any library that should be included in the project using
@@ -93,7 +93,7 @@ linux:
 	
 	# when parsing the file system looking for include paths exclude this for all or
 	# a specific platform
-    	# ADDON_INCLUDES_EXCLUDE = libs/libfreenect/platform/%
+	# ADDON_INCLUDES_EXCLUDE = libs/libfreenect/platform/%
 	
 win_cb:
 	
@@ -108,7 +108,11 @@ android/armeabi:
 android/armeabi-v7a:	
 
 osx:
-    
+	ADDON_LIBS += /opt/homebrew/lib/aravis-0.8
+	ADDON_INCLUDES += /opt/homebrew/include/aravis-0.8
+	ADDON_INCLUDES += /opt/homebrew/include/glib-2.0
+	ADDON_INCLUDES += /opt/homebrew/lib/glib-2.0/include
+
 ios:
 
 
