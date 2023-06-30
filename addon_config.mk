@@ -15,16 +15,16 @@
 # and the PG will write to the console the kind of error and in which line it is
 
 meta:
-	ADDON_NAME = ofxAravis
-	ADDON_DESCRIPTION = Addon to use Aravis
+	ADDON_NAME = ofxAravis (+M1)
+	ADDON_DESCRIPTION = Addon to use Aravis (forked with M1 support)
 	ADDON_AUTHOR = Philip Whitfield
-	ADDON_TAGS = "camera" "linux"
-	ADDON_URL = http://github.com/underdoeg/ofxAravis
+	ADDON_TAGS = "camera" "linux" "macos"
+	ADDON_URL = http://github.com/autr/ofxAravis
 
 common:
 	# dependencies with other addons, a list of them separated by spaces 
 	# or use += in several lines
-	ADDON_DEPENDENCIES = ofxOpenCv
+	# ADDON_DEPENDENCIES 
 	
 	# include search paths, this will be usually parsed from the file system
 	# but if the addon or addon libraries need special search paths they can be
@@ -108,7 +108,13 @@ android/armeabi:
 android/armeabi-v7a:	
 
 osx:
-	ADDON_LIBS += /opt/homebrew/lib/aravis-0.8
+	ADDON_LIBS += /opt/homebrew/lib/libaravis-0.8.0.dylib
+	ADDON_LIBS += /opt/homebrew/lib/libglib-2.0.0.dylib
+	ADDON_LIBS += /opt/homebrew/lib/libgio-2.0.0.dylib 
+	ADDON_LIBS += /opt/homebrew/lib/libgobject-2.0.0.dylib
+	ADDON_LIBS += /opt/homebrew/lib/libgmodule-2.0.0.dylib
+	ADDON_LIBS += /opt/homebrew/lib/libgthread-2.0.0.dylib
+
 	ADDON_INCLUDES += /opt/homebrew/include/aravis-0.8
 	ADDON_INCLUDES += /opt/homebrew/include/glib-2.0
 	ADDON_INCLUDES += /opt/homebrew/lib/glib-2.0/include

@@ -22,5 +22,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-        ofxAravis aravis;
+        ofxAravis::Grabber aravis;
+        bool bInited = false;
 };

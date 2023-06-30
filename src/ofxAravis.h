@@ -35,46 +35,75 @@
 
 #include <chrono>
 
-class ofxAravis{
-public:
-	using Clock = std::chrono::high_resolution_clock;
+namespace ofxAravis {
+    struct Device {
+        std::string id;
+        std::string physical_id;
+        std::string address;
+        std::string vendor;
+        std::string manufacturer_info;
+        std::string model;
+        std::string serial_nbr;
+        std::string protocol;
+    };
 
-	ofxAravis();
-	~ofxAravis();
+    class Grabber{
+        public:
+            using Clock = std::chrono::high_resolution_clock;
 
-	void setSize(int width, int height);
-	void setRegion(int x, int y, int width, int height);
-	void setPixelFormat(ArvPixelFormat format);
-	bool setup();
-	bool isInitialized();
-	void stop();
-	double getTemperature();
+            Grabber();
+            ~Grabber();
 
-	void setExposure(double exposure);
+            void setPixelFormat(ArvPixelFormat format);
+            bool setup(int targetX = -1, int targetY = -1, int targetWidth = -1, int targetHeight = -1, const char * targetPixelFormat = "");
+            bool isInitialized();
+            void stop();
+        
+            double getTemperature();
+        
+            std::vector<Device> & listDevices();
+            std::vector<std::string> & listFormats();
+        
+            void setExposure(double exposure);
+            int getSensorWidth();
+            int getSensorHeight();
 
-	void update();
+            void update();
 
-	void draw(int x=0, int y=0, int w=0, int h=0);
-	Clock::time_point last_frame();
+            void draw(int x=0, int y=0, int w=0, int h=0);
+            Clock::time_point last_frame();
 
-	ArvCamera* camera;
-	ArvStream* stream;
+            ArvCamera* camera;
+            ArvStream* stream;
+        
+            void setExposureValue( double value );
+            void setExposureAuto( ArvAuto value ); // ARV_AUTO_OFF or ARV_AUTO_ONCE or ARV_AUTO_CONTINUOUS
+        
+            double getExposureValue();
+            ArvAuto getExposureAuto(); // ARV_AUTO_OFF or ARV_AUTO_ONCE or ARV_AUTO_CONTINUOUS
 
-private:
-	static void onNewBuffer(ArvStream *stream, ofxAravis* aravis);
-//	void setPixels(ArvBuffer *buffer, int w, int h, ofImageType imageType);
-	void setPixels(cv::Mat& mat);
+        private:
+            static void onNewBuffer(ArvStream * stream, Grabber * aravis);
+            void setPixels(cv::Mat& mat);
+            
+            vector<Device> devices;
+            vector<std::string> formats;
+        
+            int araX, araY, araWidth, araHeight; const char * araPixelFormat; // what gets sent to API
+            int initX, initY, initWidth, initHeight, initExp, initExpAuto; const char * initPixelFormat; // default dimensions reported from API
+            int x, y, width, height; const char * pixelFormat; // dimensions reported back from API
+            int w, h; // drawing width and height
+        
+            int sensorWidth, sensorHeight;
+        
+            ArvPixelFormat targetPixelFormat = ARV_PIXEL_FORMAT_BAYER_RG_8;
+            std::mutex mutex;
+            std::atomic_bool bFrameNew;
+            ofImage image;
+            cv::Mat mat;
+            ofImageType imageType;
+            ArvBuffer *buffer;
+            Clock::time_point p_last_frame;
+    };
 
-	int targetX, targetY, targetWidth, targetHeight;
-	int x, y, width, height;
-	ArvPixelFormat targetPixelFormat = ARV_PIXEL_FORMAT_BAYER_RG_8;
-	//Config<double> targetExposure, targetGain;
-	std::mutex mutex;
-	std::atomic_bool bFrameNew;
-	ofImage image;
-	cv::Mat mat;
-	int w, h;
-	ofImageType imageType;
-	ArvBuffer *buffer;
-	Clock::time_point p_last_frame;
-};
+}

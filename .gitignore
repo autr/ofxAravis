@@ -5,3 +5,4 @@ Makefile
 bin
 *.make
 .DS_Store
+of.entitlements
