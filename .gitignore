@@ -3,6 +3,6 @@ Makefile
 *.plist
 *.xcconfig
 bin
-*.make
+config.make
 .DS_Store
 of.entitlements
