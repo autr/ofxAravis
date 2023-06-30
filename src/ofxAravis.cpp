@@ -3,6 +3,11 @@
 
 namespace ofxAravis {
 
+
+    ofTexture & Grabber::getTexture() {
+        return image.getTexture();
+    }
+
     void Grabber::onNewBuffer(ArvStream *stream, Grabber *aravis) {
         ArvBuffer *buffer;
         
@@ -60,6 +65,29 @@ namespace ofxAravis {
         return arv_camera_get_exposure_time_auto(camera, &err);
     }
 
+    void Grabber::setFPS( double fps ) {
+        GError *err = nullptr;
+        arv_camera_set_frame_rate(camera, fps, &err);
+    }
+    double Grabber::getFPS() {
+        GError *err = nullptr;
+        return arv_camera_get_frame_rate(camera, &err);
+    }
+    double Grabber::getMinFPS() {
+        GError *err = nullptr;
+        double min;
+        double max;
+        arv_camera_get_frame_rate_bounds( camera, &min, &max, &err);
+        return min;
+    }
+    double Grabber::getMaxFPS() {
+        GError *err = nullptr;
+        double min;
+        double max;
+        arv_camera_get_frame_rate_bounds( camera, &min, &max, &err);
+        return max;
+    }
+
     void Grabber::update() {
         if (bFrameNew) {
             bFrameNew = false;
@@ -69,31 +97,40 @@ namespace ofxAravis {
         }
     }
 
-    std::vector<Device> & Grabber::listDevices(){
+    Device GetDeviceInfo( int idx ) {
+        
+        ofxAravis::Device device;
+        
+        device.id = arv_get_device_id(idx);
+        device.physical_id = arv_get_device_physical_id(idx);
+        device.address = arv_get_device_address(idx);
+        device.vendor = arv_get_device_vendor(idx);
+        device.manufacturer_info = arv_get_device_manufacturer_info(idx);
+        device.model = arv_get_device_model(idx);
+        device.serial_nbr = arv_get_device_serial_nbr(idx);
+        device.protocol = arv_get_device_protocol(idx);
+        
+        return device;
+    }
+
+    std::vector<Device> ListAllDevices( bool print ){
         arv_update_device_list();
-        devices.clear();
+        std::vector<Device> devices;
         for (int i = 0; i < arv_get_n_devices(); i++) {
             
-            ofxAravis::Device device;
+            ofxAravis::Device device = GetDeviceInfo( i );
             
-            device.id = arv_get_device_id(i);
-            device.physical_id = arv_get_device_physical_id(i);
-            device.address = arv_get_device_address(i);
-            device.vendor = arv_get_device_vendor(i);
-            device.manufacturer_info = arv_get_device_manufacturer_info(i);
-            device.model = arv_get_device_model(i);
-            device.serial_nbr = arv_get_device_serial_nbr(i);
-            device.protocol = arv_get_device_protocol(i);
-
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "id: " + device.id;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "physical_id: " + device.physical_id;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "address: " + device.address;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "vendor: " + device.vendor;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "manufacturer_info :" + device.manufacturer_info;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "model: " + device.model;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "serial_nbr: " + device.serial_nbr;
-            ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "protocol: " + device.protocol;
-
+            if (print) {
+                
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "id: " + device.id;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "physical_id: " + device.physical_id;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "address: " + device.address;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "vendor: " + device.vendor;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "manufacturer_info :" + device.manufacturer_info;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "model: " + device.model;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "serial_nbr: " + device.serial_nbr;
+                ofLogNotice("ofxAravis") << "DEVICE " + ofToString(i) + " " << "protocol: " + device.protocol;
+            }
 
             devices.push_back(device);
         }
@@ -108,22 +145,68 @@ namespace ofxAravis {
         stop();
     }
 
+    void Grabber::drawInfo( int x, int y ) {
+        
+        glm::vec2 center = glm::vec2( ofGetWidth()/2, ofGetHeight()/2 );
+        
+        std::string model = getInfo().model;
+        std::string FPS = ofToString(getFPS());
+        std::string minFPS = ofToString(getMinFPS());
+        std::string maxFPS = ofToString(getMaxFPS());
+        std::string appFPS = ofToString(int(ofGetFrameRate()));
+        std::string temp = ofToString(getTemperature());
+        std::string sensorWidth = ofToString(getSensorWidth());
+        std::string sensorHeight = ofToString(getSensorHeight());
+        std::string expValue = ofToString(getExposureValue());
+        ArvAuto expAuto = getExposureAuto();
+        
+        std::string expAutoMode = expAuto == 0 ? "ARV_AUTO_OFF" : expAuto == 1 ? "ARV_AUTO_ONCE" : "ARV_AUTO_CONTINUOUS";
+        
+        if (isInited()) {
+            ofDrawBitmapStringHighlight(model, glm::vec2(x,y+0), ofColor::white, ofColor::black);
+            ofDrawBitmapStringHighlight("SENSOR: " + sensorWidth + " x " + sensorHeight, glm::vec2(x,y+20));
+            ofDrawBitmapStringHighlight("MODE: " + expAutoMode, glm::vec2(x,y+40));
+            ofDrawBitmapStringHighlight("EXPOSURE: " + expValue, glm::vec2(x,y+60));
+            ofDrawBitmapStringHighlight("CELCIUS: " + temp, glm::vec2(x,y+80));
+            ofDrawBitmapStringHighlight("FPS: " + FPS + " / APP: " + appFPS, glm::vec2(x,y+100));
+            ofDrawBitmapStringHighlight("MIN/MAX: " + minFPS + " / " + maxFPS, glm::vec2(x,y+120));
+        } else {
+            ofDrawBitmapStringHighlight("UNINITIALISED.", glm::vec2(x, y+0));
+        }
+    }
+
     void Grabber::setPixelFormat(ArvPixelFormat format) {
         targetPixelFormat = format;
     }
 
-    bool Grabber::setup( int targetX, int targetY, int targetWidth, int targetHeight, const char * targetPixelFormat ) {
+    Device & Grabber::getInfo() {
+        return info;
+    }
+
+    bool Grabber::isInited() {
+        return inited;
+    }
+
+    bool Grabber::setup( int targetCamera, int targetX, int targetY, int targetWidth, int targetHeight, const char * targetPixelFormat ) {
         stop();
         
         bFrameNew = false;
         
         GError *err = nullptr;
         
-        camera = arv_camera_new(nullptr, &err);
+        if ( targetCamera >= ofxAravis::ListAllDevices(false).size() ) {
+            ofLogError("ofxAravis") << "No camera to open at: " << targetCamera;
+            inited = false;
+            return inited;
+        }
+        
+        info = GetDeviceInfo( targetCamera );
+        camera = arv_camera_new(info.id.c_str(), &err);
         
         if (!camera) {
-            ofLogError("ofxAravis") << "No camera found";
-            return false;
+            ofLogError("ofxAravis") << "No camera could be created at: " << targetCamera;
+            inited = false;
+            return inited;
         }
         
         arv_camera_get_region(camera, &initX, &initY, &initWidth, &initHeight, &err);
@@ -211,10 +294,13 @@ namespace ofxAravis {
             // Connect the new-buffer signal
             g_signal_connect (stream, "new-buffer", G_CALLBACK(onNewBuffer), this);
             arv_stream_set_emit_signals(stream, TRUE);
+            inited = true;
         } else {
             ofLogError("ofxARavis") << "create stream failed";
+            inited = false;
         }
-        return true;
+        
+        return inited;
     }
 
     int Grabber::getSensorWidth() { return sensorWidth; }

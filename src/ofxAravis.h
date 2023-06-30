@@ -47,6 +47,9 @@ namespace ofxAravis {
         std::string protocol;
     };
 
+    Device GetDeviceInfo( int idx );
+    std::vector<Device> ListAllDevices( bool print = true );
+
     class Grabber{
         public:
             using Clock = std::chrono::high_resolution_clock;
@@ -55,14 +58,14 @@ namespace ofxAravis {
             ~Grabber();
 
             void setPixelFormat(ArvPixelFormat format);
-            bool setup(int targetX = -1, int targetY = -1, int targetWidth = -1, int targetHeight = -1, const char * targetPixelFormat = "");
+            bool setup(int targetCamera = 0, int targetX = -1, int targetY = -1, int targetWidth = -1, int targetHeight = -1, const char * targetPixelFormat = "");
             bool isInitialized();
             void stop();
         
             double getTemperature();
-        
-            std::vector<Device> & listDevices();
+            
             std::vector<std::string> & listFormats();
+            Device & getInfo();
         
             void setExposure(double exposure);
             int getSensorWidth();
@@ -71,22 +74,33 @@ namespace ofxAravis {
             void update();
 
             void draw(int x=0, int y=0, int w=0, int h=0);
+            void drawInfo( int x = 10, int y = 20 );
             Clock::time_point last_frame();
 
             ArvCamera* camera;
             ArvStream* stream;
         
+            ofTexture & getTexture();
+        
+            bool isInited();
             void setExposureValue( double value );
             void setExposureAuto( ArvAuto value ); // ARV_AUTO_OFF or ARV_AUTO_ONCE or ARV_AUTO_CONTINUOUS
         
             double getExposureValue();
             ArvAuto getExposureAuto(); // ARV_AUTO_OFF or ARV_AUTO_ONCE or ARV_AUTO_CONTINUOUS
+        
+        
+            void setFPS( double fps );
+            double getFPS();
+            double getMinFPS();
+            double getMaxFPS();
+        
 
         private:
             static void onNewBuffer(ArvStream * stream, Grabber * aravis);
             void setPixels(cv::Mat& mat);
             
-            vector<Device> devices;
+            Device info;
             vector<std::string> formats;
         
             int araX, araY, araWidth, araHeight; const char * araPixelFormat; // what gets sent to API
@@ -95,7 +109,7 @@ namespace ofxAravis {
             int w, h; // drawing width and height
         
             int sensorWidth, sensorHeight;
-        
+            bool inited = false;
             ArvPixelFormat targetPixelFormat = ARV_PIXEL_FORMAT_BAYER_RG_8;
             std::mutex mutex;
             std::atomic_bool bFrameNew;

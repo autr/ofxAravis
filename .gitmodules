@@ -1,0 +1,3 @@
+[submodule "AravisSyphonServer"]
+	path = AravisSyphonServer
+	url = git@github.com:autr/AravisSyphonServer.git

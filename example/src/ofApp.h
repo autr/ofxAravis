@@ -23,5 +23,4 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
         ofxAravis::Grabber aravis;
-        bool bInited = false;
 };
