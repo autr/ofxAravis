@@ -47,8 +47,23 @@ namespace ofxAravis {
         std::string protocol;
     };
 
+    struct Feature {
+        std::string key;
+        std::string value;
+    };
+    struct Bounds {
+        double min;
+        double max;
+    };
+
+    struct TriggerSource {
+        std::string todo;
+    };
+
     Device GetDeviceInfo( int idx );
     std::vector<Device> ListAllDevices( bool print = true );
+    void HandleError( GError * err );
+    std::vector<std::string> ArrayToVector( const char ** array, int length );
 
     class Grabber{
         public:
@@ -57,6 +72,7 @@ namespace ofxAravis {
             Grabber();
             ~Grabber();
 
+            void onAppExit(ofEventArgs& args);
             void setPixelFormat(ArvPixelFormat format);
             bool setup(int targetCamera = 0, int targetX = -1, int targetY = -1, int targetWidth = -1, int targetHeight = -1, const char * targetPixelFormat = "");
             bool isInitialized();
@@ -79,22 +95,58 @@ namespace ofxAravis {
 
             ArvCamera* camera;
             ArvStream* stream;
+            std::vector<std::string> availableTriggerModes;
+            std::vector<std::string> availableTriggerSources;
         
             ofTexture & getTexture();
+            int totalFrames;
         
             bool isInited();
-            void setExposureValue( double value );
-            void setExposureAuto( ArvAuto value ); // ARV_AUTO_OFF or ARV_AUTO_ONCE or ARV_AUTO_CONTINUOUS
         
-            double getExposureValue();
-            ArvAuto getExposureAuto(); // ARV_AUTO_OFF or ARV_AUTO_ONCE or ARV_AUTO_CONTINUOUS
+            // ------- EXPOSURE TIME -------
         
+            bool hasExposureTime();
+            void setExposureTime( double value );
+            double getExposureTime();
+            Bounds getExposureBounds();
         
+            // ------- EXPOSURE TIME AUTO -------
+        
+            bool hasExposureTimeAuto();
+            void setExposureTimeAuto( ArvAuto mode );
+            ArvAuto getExposureTimeAuto();
+        
+            // ------- TRIGGER MODE -------
+        
+            void setTriggerMode( std::string key );
+            std::vector<std::string> getAvailableTriggerModes();
+        //arv_camera_dup_available_triggers
+        
+            // ------- TRIGGER SOURCE -------
+        
+            void setTriggerSource( std::string key );
+            std::string getTriggerSource();
+            std::vector<std::string> getAvailableTriggerSources();
+        
+            // ------- ENUMERATIONS -------
+            
+            vector<std::string> getAvailableEnumerations( std::string key );
+        
+            // ------- FEATURES -------
+        
+            void setFeatureString( std::string key, std::string value );
+            std::string getFeatureString( std::string key );
+        
+            // ------- FPS -------
+
             void setFPS( double fps );
             double getFPS();
             double getMinFPS();
             double getMaxFPS();
         
+        
+        
+            
 
         private:
             static void onNewBuffer(ArvStream * stream, Grabber * aravis);
