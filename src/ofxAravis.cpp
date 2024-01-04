@@ -25,17 +25,33 @@ namespace ofxAravis {
                 auto h = arv_buffer_get_image_height(buffer);
                 auto format = arv_buffer_get_image_pixel_format(buffer);
                 
+//                ofLog() << "FORMAT" << format;
+                
                 cv::Mat matRgb(h, w, CV_8UC3);
                 
+//                if (!formatIsFound) {
+                    // DO THIS
+                    // for loop over all ARV_PIXEL_FORMATS
+                    // if (format == ARV_PIXEL_FORMAT_XXXX) ofLog() << "ARV FORMAT" << nameOfARVPixelFormat;
+                
+//                }
                 switch (format) {
                     case ARV_PIXEL_FORMAT_BAYER_RG_8: {
                         cv::Mat matBayer(h, w, CV_8UC1, const_cast<void *>(arv_buffer_get_data(buffer, nullptr)));
                         cv::cvtColor(matBayer, matRgb, CV_BayerRG2BGR);
                     }
                         break;
+
+                    case ARV_PIXEL_FORMAT_BAYER_GB_8: {
+                        cv::Mat matBayer(h, w, CV_8UC1, const_cast<void *>(arv_buffer_get_data(buffer, nullptr)));
+                        cv::cvtColor(matBayer, matRgb, CV_BayerGB2BGR);
+                    }
+                        break;
+
                     default:
-                        ofLogError("ofxARavis") << "Unknown pixel format";
+                        ofLogError("ofxAravis") << "Unknown pixel format";
                 }
+
                 aravis->setPixels(matRgb);
             }
             arv_stream_push_buffer(stream, buffer);
@@ -48,6 +64,10 @@ namespace ofxAravis {
         mat = m.clone();
         mutex.unlock();
         bFrameNew = true;
+        
+        float time = ofGetElapsedTimef();
+        fpsTimeElapsed = time - previousTimestamp;
+        previousTimestamp = time;
         totalFrames = totalFrames + 1;
     }
 
@@ -176,17 +196,17 @@ namespace ofxAravis {
         GError *err = nullptr;
         const char ** array = arv_camera_dup_available_enumerations_as_strings( camera, key.c_str(), &numValues, &err);
         vector<std::string> strings = ArrayToVector( array, numValues );
-        for (int i = 0; i < strings.size(); i++) {
-            ofLogNotice("ofxAravis") << "ENUMERATE:" << key << i << strings[i];
-        }
+//        for (int i = 0; i < strings.size(); i++) {
+//            ofLogNotice("ofxAravis") << "ENUMERATE:" << key << i << strings[i];
+//        }
         return strings;
     }
 
 
     // ------- FEATURES -------
 
+
     void Grabber::setFeatureString( std::string key, std::string value ) {
-        
             ofLog() << "setting string feature:" << key << value;
             GError *err = nullptr;
             const char * keyChar = key.c_str();
@@ -197,7 +217,56 @@ namespace ofxAravis {
     std::string Grabber::getFeatureString( std::string key ) {
             GError *err = nullptr;
             const char * keyChar = key.c_str();
-            std::string value = std::string( arv_camera_get_string( camera, keyChar, &err ) );
+            auto res = arv_camera_get_string( camera, keyChar, &err );
+            std::string value = (res == NULL) ? "ERROR" : std::string(res);
+            HandleError( err );
+            return value;
+    }
+
+    void Grabber::setFeatureBoolean( std::string key, bool value ) {
+            ofLog() << "setting bool feature:" << key << value;
+            GError *err = nullptr;
+            const char * keyChar = key.c_str();
+            arv_camera_set_boolean( camera, keyChar, value, &err );
+            HandleError( err );
+    }
+    bool Grabber::getFeatureBoolean( std::string key ) {
+            GError *err = nullptr;
+            const char * keyChar = key.c_str();
+            auto res = arv_camera_get_boolean( camera, keyChar, &err );
+            bool value = (res == NULL) ? false : bool(res);
+            HandleError( err );
+            return value;
+    }
+
+    void Grabber::setFeatureInteger( std::string key, int value ) {
+            ofLog() << "setting integer feature:" << key << value;
+            GError *err = nullptr;
+            const char * keyChar = key.c_str();
+            arv_camera_set_integer( camera, keyChar, gint64(value), &err );
+            HandleError( err );
+    }
+    int Grabber::getFeatureInteger( std::string key ) {
+            GError *err = nullptr;
+            const char * keyChar = key.c_str();
+            auto res = arv_camera_get_integer( camera, keyChar, &err );
+            int value = (res == NULL) ? -1 : int(res);
+            HandleError( err );
+            return value;
+    }
+    
+    void Grabber::setFeatureFloat( std::string key, int value ) {
+            ofLog() << "setting float feature:" << key << value;
+            GError *err = nullptr;
+            const char * keyChar = key.c_str();
+            arv_camera_set_float( camera, keyChar, gint64(value), &err );
+            HandleError( err );
+    }
+   float Grabber::getFeatureFloat( std::string key ) {
+            GError *err = nullptr;
+            const char * keyChar = key.c_str();
+            auto res = arv_camera_get_float( camera, keyChar, &err );
+            float value = (res == NULL) ? -1.0 : float(res);
             HandleError( err );
             return value;
     }
@@ -231,13 +300,35 @@ namespace ofxAravis {
         HandleError( err );
         return max;
     }
+    float Grabber::getActualFPS() {
+        return float( 1.0 / fpsTimeElapsed );
+    }
 
-    void Grabber::update() {
+    // ------- FORMAT -------
+
+    void Grabber::setPixelFormat( std::string format ) {
+        GError *err = nullptr;
+        const char * formatChar = format.c_str();
+        arv_camera_set_pixel_format_from_string(camera, formatChar, &err);
+        HandleError( err );
+    }
+    std::string Grabber::getPixelFormat() {
+        GError *err = nullptr;
+        auto res = arv_camera_get_pixel_format_as_string(camera, &err );
+        std::string value = (res == NULL) ? "ERROR" : std::string(res);
+        HandleError( err );
+        return value;
+    }
+
+    bool Grabber::update() {
         if (bFrameNew) {
             bFrameNew = false;
             mutex.lock();
             image.setFromPixels(mat.data, width, height, ofImageType::OF_IMAGE_COLOR);
             mutex.unlock();
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -307,9 +398,12 @@ namespace ofxAravis {
         std::string minFPS = ofToString(getMinFPS());
         std::string maxFPS = ofToString(getMaxFPS());
         std::string appFPS = ofToString(int(ofGetFrameRate()));
-        std::string temp = ofToString(getTemperature());
+//        std::string temp = ofToString(getTemperature());
+        std::string currentFormat = getPixelFormat();
         std::string sensorWidth = ofToString(getSensorWidth());
         std::string sensorHeight = ofToString(getSensorHeight());
+        std::string actualFPS = ofToString(getActualFPS());
+        std::string gainAuto = ofToString(getFeatureString( "GainAuto" ));
         
         std::string expValue = ofToString(getExposureTime());
         ArvAuto expAuto = getExposureTimeAuto();
@@ -330,12 +424,15 @@ namespace ofxAravis {
             ofDrawBitmapStringHighlight("SENSOR: " + sensorWidth + " x " + sensorHeight, glm::vec2(x,y+20));
             ofDrawBitmapStringHighlight("MODE: " + expAutoMode, glm::vec2(x,y+40));
             ofDrawBitmapStringHighlight("EXPOSURE: " + expValue, glm::vec2(x,y+60));
-            ofDrawBitmapStringHighlight("CELCIUS: " + temp, glm::vec2(x,y+80));
+            //            ofDrawBitmapStringHighlight("CELCIUS: " + temp, glm::vec2(x,y+80));
+            ofDrawBitmapStringHighlight("FORMAT: " + currentFormat, glm::vec2(x,y+80));
             ofDrawBitmapStringHighlight("FPS: " + FPS + " / APP: " + appFPS, glm::vec2(x,y+100));
             ofDrawBitmapStringHighlight("FPS MIN / MAX: " + minFPS + " / " + maxFPS, glm::vec2(x,y+120));
-            ofDrawBitmapStringHighlight("TRIGGER SOURCE: " + triggerSource, glm::vec2(x,y+140));
-            ofDrawBitmapStringHighlight("EXPOSURE BOUNDS: " + ofToString(exposureBounds.min) + " / " + ofToString(exposureBounds.max), glm::vec2(x,y+160));
-            ofDrawBitmapStringHighlight("TOTAL FRAMES: " + ofToString(totalFrames), glm::vec2(x,y+180));
+            ofDrawBitmapStringHighlight("ACTUAL FPS: " + actualFPS, glm::vec2(x,y+140));
+            ofDrawBitmapStringHighlight("TRIGGER SOURCE: " + triggerSource, glm::vec2(x,y+160));
+            ofDrawBitmapStringHighlight("EXPOSURE BOUNDS: " + ofToString(exposureBounds.min) + " / " + ofToString(exposureBounds.max), glm::vec2(x,y+180));
+            ofDrawBitmapStringHighlight("TOTAL FRAMES: " + ofToString(totalFrames), glm::vec2(x,y+200));
+            ofDrawBitmapStringHighlight("GAIN AUTO: " + gainAuto, glm::vec2(x,y+220));
         } else {
             ofDrawBitmapStringHighlight("UNINITIALISED.", glm::vec2(x, y+0));
         }
@@ -354,10 +451,12 @@ namespace ofxAravis {
     }
 
     bool Grabber::setup( int targetCamera, int targetX, int targetY, int targetWidth, int targetHeight, const char * targetPixelFormat ) {
-        stop();
         
+        stop();
         bFrameNew = false;
         totalFrames = 0;
+        previousTimestamp = ofGetElapsedTimef();
+        fpsTimeElapsed = 0;
         
         GError *err = nullptr;
         
@@ -435,6 +534,7 @@ namespace ofxAravis {
             formats.push_back(format);
             allFormats = format + " | " + allFormats;
         }
+        
         ofLogNotice("ofxAravis") << "PIXEL FORMATS: " << allFormats;
         // A) SETTING ...
         
@@ -448,6 +548,10 @@ namespace ofxAravis {
         arv_camera_get_region(camera, &x, &y, &width, &height, &err);
         HandleError( err );
         pixelFormat = arv_camera_get_pixel_format_as_string(camera, &err);
+        if (pixelFormat == NULL) {
+            ofLogError("ofxAravis") << "pixelFormat reports NULL";
+            pixelFormat = "NULL";
+        }
         HandleError( err );
         
         // C) REPORT ...
@@ -459,14 +563,17 @@ namespace ofxAravis {
         auto payload = arv_camera_get_payload(camera, &err);
         HandleError( err );
         
+        // ------ STREAMS ------
+        
         stream = arv_camera_create_stream(camera, nullptr, nullptr, &err);
         HandleError( err );
+        
+        int numberOfBuffers = 100;
         
         if (stream != nullptr) {
             
             // Push 50 buffer in the stream input buffer queue
-            for (int i = 0; i < 20; i++)
-                arv_stream_push_buffer(stream, arv_buffer_new(payload, nullptr));
+            for (int i = 0; i < numberOfBuffers; i++) arv_stream_push_buffer(stream, arv_buffer_new(payload, nullptr));
             
             //start stream
             arv_camera_start_acquisition(camera, &err);
@@ -482,6 +589,13 @@ namespace ofxAravis {
         }
         
         return inited;
+    }
+
+    int Grabber::getWidth() {
+        return initWidth;
+    }
+    int Grabber::getHeight() {
+        return initHeight;
     }
 
     int Grabber::getSensorWidth() { return sensorWidth; }
@@ -503,6 +617,7 @@ namespace ofxAravis {
         HandleError( err );
         g_object_unref(stream);
         g_object_unref(camera);
+        ofLogNotice("ofxAravis") << "stopped!";
     }
 
     void Grabber::setExposure(double exposure) {
@@ -537,6 +652,25 @@ namespace ofxAravis {
         double val = arv_device_get_float_feature_value(dev, "DeviceTemperature", &err);
         HandleError( err );
         return val;
+    }
+
+
+    std::string Grabber::getGenicamXML() {
+        const char *genicam_xml;
+        size_t size;
+        
+        ArvDevice *dev = arv_camera_get_device(camera);
+        if (!dev) {
+            ofLogError("ofxAravis") << "Could not get device";
+            return "";
+        }
+        genicam_xml = arv_device_get_genicam_xml(dev, &size);
+        if (!genicam_xml) {
+            ofLogError("ofxAravis") << "Failed to retrieve GenICam XML";
+            return "";
+        }
+        return std::string(genicam_xml);
+
     }
 
 }

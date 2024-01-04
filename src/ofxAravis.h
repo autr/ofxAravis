@@ -87,7 +87,7 @@ namespace ofxAravis {
             int getSensorWidth();
             int getSensorHeight();
 
-            void update();
+            bool update();
 
             void draw(int x=0, int y=0, int w=0, int h=0);
             void drawInfo( int x = 10, int y = 20 );
@@ -116,6 +116,7 @@ namespace ofxAravis {
             void setExposureTimeAuto( ArvAuto mode );
             ArvAuto getExposureTimeAuto();
         
+        
             // ------- TRIGGER MODE -------
         
             void setTriggerMode( std::string key );
@@ -137,15 +138,37 @@ namespace ofxAravis {
             void setFeatureString( std::string key, std::string value );
             std::string getFeatureString( std::string key );
         
+            void setFeatureBoolean( std::string key, bool value );
+            bool getFeatureBoolean( std::string key );
+        
+            void setFeatureInteger( std::string key, int value );
+            int getFeatureInteger( std::string key );
+            
+            void setFeatureFloat( std::string key, int value );
+            float getFeatureFloat( std::string key );
+        
             // ------- FPS -------
 
             void setFPS( double fps );
             double getFPS();
             double getMinFPS();
             double getMaxFPS();
+            float getActualFPS();
+            float previousTimestamp;
+            float fpsTimeElapsed;
         
+            // ------- FORMATS -------
         
+            void setPixelFormat( std::string format );
+            std::string getPixelFormat();
+            bool formatIsFound = false;
         
+            // ------- XML -------
+        
+            std::string getGenicamXML();
+        
+            int getWidth();
+            int getHeight();
             
 
         private:
@@ -159,7 +182,6 @@ namespace ofxAravis {
             int initX, initY, initWidth, initHeight, initExp, initExpAuto; const char * initPixelFormat; // default dimensions reported from API
             int x, y, width, height; const char * pixelFormat; // dimensions reported back from API
             int w, h; // drawing width and height
-        
             int sensorWidth, sensorHeight;
             bool inited = false;
             ArvPixelFormat targetPixelFormat = ARV_PIXEL_FORMAT_BAYER_RG_8;
