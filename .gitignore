@@ -16,3 +16,5 @@ Makefile,
 *.qbs.user
 bind/*.app
 bin,
+bind/*.app
+.AppleDouble
