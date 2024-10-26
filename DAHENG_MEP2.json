@@ -1,0 +1,2151 @@
+{
+    "accessMode": "RO",
+    "children": [
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a text description that indicates the name of the device's vendor.",
+            "featureName": "DeviceVendorName",
+            "nodeType": "StringReg",
+            "value": "Daheng Imaging"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a text description that indicates the model name of the device.",
+            "featureName": "DeviceModelName",
+            "nodeType": "StringReg",
+            "value": "ME2P-900-43U3C"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "featureName": "ProductionCode",
+            "nodeType": "StringReg",
+            "value": "E020C"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a text description that indicates the Original name of the device.",
+            "featureName": "DeviceOriginalName",
+            "nodeType": "StringReg",
+            "value": "ME2P-900-43U3C"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a string that indicates the version of the device.",
+            "featureName": "DeviceVersion",
+            "nodeType": "StringReg",
+            "value": "11.11:11.31:14.11"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a string that indicates the version of the device's firmware and software.",
+            "featureName": "DeviceFirmwareVersion",
+            "nodeType": "StringReg",
+            "value": "01.40.000.005:01.01.2211.9011"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a string that provides a unique identifier for the device such as a serial number or a GUID.",
+            "featureName": "DeviceSerialNumber",
+            "nodeType": "StringReg",
+            "value": "GCN23090002"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is a string that indicates the version of the device's Factory Setting.",
+            "featureName": "FactorySettingVersion",
+            "nodeType": "StringReg",
+            "value": "01.01.2208.9081"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This is a read/write element. It is a user programmable string.",
+            "featureName": "DeviceUserID",
+            "nodeType": "StringReg",
+            "value": ""
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects which Link of the device to control.",
+            "enum": ["DeviceLinkThroughputLimitMode", "DeviceLinkThroughputLimit", "DeviceLinkCurrentThroughput"],
+            "featureName": "DeviceLinkSelector",
+            "nodeType": "Integer",
+            "options": [],
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Controls if the DeviceLinkThroughputLimit is active.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "DeviceLinkThroughputLimitMode",
+            "nodeType": "Enumeration",
+            "value": "On"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Limits the maximum bandwidth of the data that will be streamed out by the device on the selected Link. ",
+            "featureName": "DeviceLinkThroughputLimit",
+            "nodeType": "Integer",
+            "unit": "Bps",
+            "value": 300000000
+        },
+        {
+            "accessMode": "RO",
+            "description": "Limits the maximum bandwidth of the data that will be streamed out by the device on the selected Link. ",
+            "featureName": "DeviceLinkCurrentThroughput",
+            "nodeType": "Integer",
+            "unit": "Bps",
+            "value": 299992832
+        }],
+        "description": "Category for device information and control.Contains the features related to the device and its sensor.",
+        "featureName": "DeviceControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is an integer that indicates the actual width of the camera's sensor in pixels.",
+            "featureName": "SensorWidth",
+            "nodeType": "IntReg",
+            "value": 4200
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is an integer that indicates the actual height of the camera's sensor in pixels.",
+            "featureName": "SensorHeight",
+            "nodeType": "IntReg",
+            "value": 2160
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is an integer that indicates maximum allowed width of the image in pixels taking into account any function that may limit the allowed width.",
+            "featureName": "WidthMax",
+            "nodeType": "IntReg",
+            "value": 4200
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only element. It is an integer that indicates maximum allowed height of the image in pixels taking into account any function that may limit the allowed height.",
+            "featureName": "HeightMax",
+            "nodeType": "IntReg",
+            "value": 2160
+        },
+        {
+            "accessMode": "RW",
+            "description": "Region Send Mode Selector.",
+            "enum": [
+            {
+                "featureName": "SingleROISendMode",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "RegionSendMode",
+            "nodeType": "Enumeration",
+            "value": "SingleROISendMode"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects the Region of interest to control.The RegionSelector feature allows devices that are able to extract multiple regions out of an image, to configure the features of those individual regions independently",
+            "enum": [
+            {
+                "featureName": "Region0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "RegionSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "Region0"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Controls if the selected Region of interest is active and streaming.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "RegionMode",
+            "nodeType": "Enumeration",
+            "value": "On"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the width of the area of interest in pixels.",
+            "featureName": "Width",
+            "nodeType": "Integer",
+            "value": 4200
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the height of the area of interest in pixels.",
+            "featureName": "Height",
+            "nodeType": "Integer",
+            "value": 2160
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the X offset (left offset) for the area of interest in pixels, i.e., the distance in pixels between the left side of the sensor and the left side of the image area.",
+            "featureName": "OffsetX",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the Y offset (top offset) for the area of interest, i.e., the distance in pixels between the top of the sensor and the top of the image area.",
+            "featureName": "OffsetY",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the format of the pixel data transmitted for acquired images.",
+            "enum": [
+            {
+                "featureName": "BayerGB12",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "BayerGB8",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "PixelFormat",
+            "nodeType": "Enumeration",
+            "value": "BayerGB8"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only feature. This enumeration provides a list of values that indicate the depth of the pixel values in the acquired images in bits per pixel. This value will always be coherent with the pixel format setting.",
+            "enum": [
+            {
+                "featureName": "Bpp64",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp48",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp36",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp32",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp30",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp24",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp16",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp12",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp10",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Bpp8",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "PixelSize",
+            "nodeType": "Enumeration",
+            "value": "Bpp8"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This is a read only feature. This enumeration provides a list of values that indicate the alignment of the camera's Bayer filter to the pixels in the acquired images.",
+            "enum": [
+            {
+                "featureName": "BayerBG",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "BayerGR",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "BayerGB",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "BayerRG",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "None",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "PixelColorFilter",
+            "nodeType": "Enumeration",
+            "value": "BayerGB"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects which test pattern generator is controlled by the TestPattern feature.",
+            "enum": [
+            {
+                "featureName": "Region0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TestPatternGeneratorSelector",
+            "nodeType": "Enumeration",
+            "value": "Region0"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration provides a list of the available test images. Selecting a test image from the list will enable the test image.",
+            "enum": [
+            {
+                "featureName": "SlantLine",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "SlantLineMoving",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "GrayFrameRampMoving",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TestPattern",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the binning horizontal mode.",
+            "enum": [
+            {
+                "featureName": "Average",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Sum",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "BinningHorizontalMode",
+            "nodeType": "Enumeration",
+            "value": "Average"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Number of adjacent horizontal pixels to be summed. Their charges will be summed and reported out of the camera as a single pixel.",
+            "featureName": "BinningHorizontal",
+            "nodeType": "Integer",
+            "value": 1
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the binning vertical mode.",
+            "enum": [
+            {
+                "featureName": "Average",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Sum",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "BinningVerticalMode",
+            "nodeType": "Enumeration",
+            "value": "Average"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Number of adjacent vertical pixels to be summed. Their charges will be summed and reported out of the camera as a single pixel.",
+            "featureName": "BinningVertical",
+            "nodeType": "Integer",
+            "value": 1
+        },
+        {
+            "accessMode": "RW",
+            "description": "Horizontal decimation factor. It specifies the extent of horizontal sub-sampling of the acquired frame, i.e. it defines how many pixel columns are left out of transmission. This has the net effect of reducing the horizontal resolution (width) of the image by the specified decimation factor. A value of 1 indicates that the camera performs no horizontal decimation.",
+            "featureName": "DecimationHorizontal",
+            "nodeType": "Integer",
+            "value": 1
+        },
+        {
+            "accessMode": "RW",
+            "description": "Vertical decimation factor. It specifies the extent of vertical sub-sampling of the acquired frame, i.e. it defines how many rows are left out of transmission. This has the net effect of reducing the vertical resolution (height) of the image by the specified decimation factor. A value of 1 indicates that the camera performs no vertical decimation.",
+            "featureName": "DecimationVertical",
+            "nodeType": "Integer",
+            "value": 1
+        },
+        {
+            "accessMode": "RW",
+            "description": "This feature is used to flip horizontally the image sent by the device. The ROI is applied after the flipping.",
+            "featureName": "ReverseX",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RW",
+            "description": "This feature is used to flip vertically the image sent by the device. The ROI is applied after the flipping.",
+            "featureName": "ReverseY",
+            "nodeType": "Boolean",
+            "value": false
+        }],
+        "description": "This category includes items that used to control the size of the acquired image and the format of the transferred pixel data.",
+        "featureName": "ImageFormatControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "Used by application software to set the mode of acquisition. This feature indicates how image are sequenced out of the camera (continuously, single shot, multi-shot)",
+            "enum": [
+            {
+                "featureName": "Continuous",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "SingleFrame",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "AcquisitionMode",
+            "nodeType": "Enumeration",
+            "value": "Continuous"
+        },
+        {
+            "accessMode": "WO",
+            "description": "This command starts the acquisition of images. If the camera is set for single frame acquisition, it will start acquisition of one frame. If the camera is set for continuous frame acquisition, it will start continuous acquisition of frames.",
+            "featureName": "AcquisitionStart",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "WO",
+            "description": "If the camera is set for continuous image acquisition and acquisition has been started, this command stops the acquisition of images.",
+            "featureName": "AcquisitionStop",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This int value sets the number of frames to acquire for each FrameBurstStart trigger.",
+            "featureName": "AcquisitionBurstFrameCount",
+            "nodeType": "Integer",
+            "value": 1
+        },
+        {
+            "accessMode": "RW",
+            "description": "Sets the acquisition status to be checked. Once a status has been set, the status can be checked by reading the AcquisitionStatus parameter value.",
+            "enum": [
+            {
+                "featureName": "AcquisitionTriggerWait",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameTriggerWait",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "AcquisitionStatusSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "FrameTriggerWait"
+        },
+        {
+            "accessMode": "RO",
+            "description": "Indicates the status (true or false) of the currently selected acquisition signal. The acquisition signal can be selected using AcquisitionStatusSelector.",
+            "featureName": "AcquisitionStatus",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the trigger type to configure. Once a trigger type has been selected, all changes to the trigger settings will be applied to the selected trigger.",
+            "enum": [
+            {
+                "featureName": "FrameBurstStart",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameStart",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TriggerSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "FrameStart"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the trigger mode for the selected trigger.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TriggerMode",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the signal source for the selected trigger.",
+            "enum": [
+            {
+                "featureName": "Line3",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Software",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TriggerSource",
+            "nodeType": "Enumeration",
+            "value": "Software"
+        },
+        {
+            "accessMode": "WO",
+            "description": "This command generates a software trigger signal.",
+            "featureName": "TriggerSoftware",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the signal transition needed to activate the selected trigger.",
+            "enum": [
+            {
+                "featureName": "RisingEdge",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FallingEdge",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TriggerActivation",
+            "nodeType": "Enumeration",
+            "value": "RisingEdge"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This float value sets the trigger delay in microseconds to apply after the trigger reception before effectively activating it.",
+            "featureName": "TriggerDelay",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Raisingedge signal pulse width is smaller than this value is invalid.",
+            "featureName": "TriggerFilterRaisingEdge",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Fallingedge signal pulse width is smaller than this value is invalid.",
+            "featureName": "TriggerFilterFallingEdge",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the exposure mode.",
+            "enum": [
+            {
+                "featureName": "Timed",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "ExposureMode",
+            "nodeType": "Enumeration",
+            "value": "Timed"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This controls the duration where the photosensitive cells are exposed to light.",
+            "featureName": "ExposureTime",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 20000.0
+        }, null,
+        {
+            "accessMode": "RW",
+            "description": "This float value sets the ExposureDelay time.",
+            "featureName": "ExposureDelay",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "The exposure auto function automatically adjusts the Auto Exposure Time parameter value within set limits, until a target average gray value for the pixel data is reached.",
+            "enum": [
+            {
+                "featureName": "Once",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Continuous",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "ExposureAuto",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Setting up automatic exposure range of minimum. When the exposure is set to auto mode, this function works.",
+            "featureName": "AutoExposureTimeMin",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 11.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Setting up automatic exposure range of maximum. When the exposure is set to auto mode, this function works.",
+            "featureName": "AutoExposureTimeMax",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 40000.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the width of the rect of interest in pixels for 2A.",
+            "featureName": "AAROIWidth",
+            "nodeType": "Integer",
+            "value": 4200
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the height of the rect of interest in pixels for 2A.",
+            "featureName": "AAROIHeight",
+            "nodeType": "Integer",
+            "value": 2160
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the X offset (left offset) for the rect of interest in pixels for 2A, i.e., the distance in pixels between the left side of the image area and the left side of the AAROI.",
+            "featureName": "AAROIOffsetX",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the Y offset (top offset) for the rect of interest for 2A, i.e., the distance in pixels between the top of the image area and the top of the AAROI.",
+            "featureName": "AAROIOffsetY",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This parameter is auto exposure and auto gain control of a benchmark parameter.",
+            "featureName": "ExpectedGrayValue",
+            "nodeType": "Integer",
+            "value": 120
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumration value enables setting the camera's acquisition frame rate to a specified value.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "AcquisitionFrameRateMode",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This parameter sets the acquisition frame rate in frames per second.",
+            "featureName": "AcquisitionFrameRate",
+            "nodeType": "Float",
+            "unit": "Hz",
+            "value": 41.0
+        },
+        {
+            "accessMode": "RO",
+            "description": "This float value that indicates the maximum allowed acquisition frame rate in frames per second given the current settings for the area of interest, exposure time, and bandwidth.",
+            "featureName": "CurrentAcquisitionFrameRate",
+            "nodeType": "Float",
+            "unit": "Hz",
+            "value": 33.06700134277344
+        }, null],
+        "description": "This category includes items that used to set the image acquisition parameters and to start and stop acquisition.",
+        "featureName": "AcquisitionControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the I/O line to configure. Once a line has been selected, all changes to the line settings will be applied to the selected line.",
+            "enum": [
+            {
+                "featureName": "Line3",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "LineSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "Line0"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This feature controls whether the physical Line is used to Input or Output a signal. When a Line supports input and output mode, the default state is Input to avoid possible electrical contention. Line Mode can take any of the following values: Input: The selected physical line is used to input an electrical signal. Output: The selected physical line is used to output an electrical signal.",
+            "enum": [
+            {
+                "featureName": "Output",
+                "isAvailable": false,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Input",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "LineMode",
+            "nodeType": "Enumeration",
+            "value": "Input"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This boolean value enables the signal inverter function for the selected input or output line.",
+            "featureName": "LineInverter",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the internally generated camera signal (source signal) for the selected line when the selected line is an output. ",
+            "enum": [
+            {
+                "featureName": "UserOutput2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "UserOutput1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "UserOutput0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Strobe",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "LineSource",
+            "nodeType": "Enumeration",
+            "value": "UserOutput0"
+        },
+        {
+            "accessMode": "RO",
+            "description": "This boolean value indicates the current logical state for the selected line at the time of polling.",
+            "featureName": "LineStatus",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RO",
+            "description": "This enumeration value selects the line status all chunk for enabling.",
+            "featureName": "LineStatusAll",
+            "nodeType": "Integer",
+            "value": 14
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the user settable output signal to configure. Once a user settable output signal has been selected, all changes to the user settable output signal settings will be applied to the selected user settable output signal.",
+            "enum": [
+            {
+                "featureName": "UserOutput2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "UserOutput1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "UserOutput0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "UserOutputSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "UserOutput0"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This boolean value sets the state of the selected user settable output signal.",
+            "featureName": "UserOutputValue",
+            "nodeType": "Boolean",
+            "value": false
+        }],
+        "description": "This category includes items that used to control the operation of the camera's digital I/O lines.",
+        "featureName": "DigitalIOControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "Selects which Timer to configure.",
+            "enum": [
+            {
+                "featureName": "Timer1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TimerSelector",
+            "nodeType": "Enumeration",
+            "value": "Timer1"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Sets the duration (in microseconds) of the Timer pulse.",
+            "featureName": "TimerDuration",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 10.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Sets the duration (in microseconds) of the delay to apply at the reception of a trigger before starting the Timer.",
+            "featureName": "TimerDelay",
+            "nodeType": "Float",
+            "unit": "us",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects the source of the trigger to start the Timer.",
+            "enum": [
+            {
+                "featureName": "ExposureStart",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "TimerTriggerSource",
+            "nodeType": "Enumeration",
+            "value": "ExposureStart"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects which Counter to configure.",
+            "enum": [
+            {
+                "featureName": "Counter1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "CounterSelector",
+            "nodeType": "Enumeration",
+            "value": "Counter1"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Select the events that will be the source to increment the Counter.",
+            "enum": [
+            {
+                "featureName": "AcquisitionTrigger",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameTrigger",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameStart",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "CounterEventSource",
+            "nodeType": "Enumeration",
+            "value": "FrameStart"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects the signals that will be the source to reset the Counter.",
+            "enum": [
+            {
+                "featureName": "Line3",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Line0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Software",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "CounterResetSource",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects the Activation mode of the Counter Reset Source signal.",
+            "enum": [
+            {
+                "featureName": "RisingEdge",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "CounterResetActivation",
+            "nodeType": "Enumeration",
+            "value": "RisingEdge"
+        },
+        {
+            "accessMode": "WO",
+            "description": "This command generates a software reset of the selected Counter.",
+            "featureName": "CounterReset",
+            "nodeType": "Command"
+        }],
+        "description": "This category contains the Counter and Timer control features.",
+        "featureName": "CounterAndTimerControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the type of event for enabling.",
+            "enum": [
+            {
+                "featureName": "FrameBurstStartWait",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameStartWait",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameBurstStartOvertrigger",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "BlockNotEmpty",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameStartOvertrigger",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "BlockDiscard",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "ExposureEnd",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "EventSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "ExposureEnd"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the notification type that will be sent to the host application for the selected event.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "EventNotification",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the Event ID for an exposure end event.",
+                "featureName": "EventExposureEnd",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the frame ID for an exposure end event.",
+                "featureName": "EventExposureEndFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the time stamp for an exposure end event.",
+                "featureName": "EventExposureEndTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventExposureEndData",
+            "nodeType": "Category"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameStartOvertrigger event ID.",
+                "featureName": "EventFrameStartOvertrigger",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "Indicates the time stamp of the FrameStartOvertrigger event",
+                "featureName": "EventFrameStartOvertriggerTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameStartOvertrigger event Frame ID.",
+                "featureName": "EventFrameStartOvertriggerFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventFrameStartOvertriggerData",
+            "nodeType": "Category"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "Indicates the FrameBurstStartOvertrigger event ID.",
+                "featureName": "EventFrameBurstStartOvertrigger",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameBurstStartOvertrigger event Frame ID.",
+                "featureName": "EventFrameBurstStartOvertriggerFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "Indicates the time stamp for the FrameBurstStartOvertrigger event.",
+                "featureName": "EventFrameBurstStartOvertriggerTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventFrameBurstStartOvertriggerData",
+            "nodeType": "Category"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameStartWait event ID.",
+                "featureName": "EventFrameStartWait",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "Indicates the time stamp of the FrameStartWait event",
+                "featureName": "EventFrameStartWaitTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameStartWait event Frame ID.",
+                "featureName": "EventFrameStartWaitFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventFrameStartWaitData",
+            "nodeType": "Category"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameBurstStartWait event ID.",
+                "featureName": "EventFrameBurstStartWait",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "Indicates the time stamp of the FrameBurstStartWait event",
+                "featureName": "EventFrameBurstStartWaitTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the FrameBurstStartWait event Frame ID.",
+                "featureName": "EventFrameBurstStartWaitFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventFrameBurstStartWaitData",
+            "nodeType": "Category"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the BlockDiscard event ID.",
+                "featureName": "EventBlockDiscard",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "Indicates the time stamp for the BlockDiscard event",
+                "featureName": "EventBlockDiscardTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the BlockDiscard event Frame ID.",
+                "featureName": "EventBlockDiscardFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventBlockDiscardData",
+            "nodeType": "Category"
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the BlockNotEmpty event ID.",
+                "featureName": "EventBlockNotEmpty",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "Indicates the time stamp of the BlockNotEmpty event",
+                "featureName": "EventBlockNotEmptyTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the BlockNotEmpty event Frame ID.",
+                "featureName": "EventBlockNotEmptyFrameID",
+                "nodeType": "Integer",
+                "value": 0
+            }],
+            "description": "N/A",
+            "featureName": "EventBlockNotEmptyData",
+            "nodeType": "Category"
+        }],
+        "description": "This category includes items that control event generation by the camera.",
+        "featureName": "EventControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the gain control to configure. Once a gain control has been selected, all changes to the gain settings will be applied to the selected control.",
+            "enum": [
+            {
+                "featureName": "AnalogAll",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "GainSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "AnalogAll"
+        },
+        {
+            "accessMode": "RW",
+            "description": "The value is an float value that sets the selected gain control in units specific to the camera.",
+            "featureName": "Gain",
+            "nodeType": "Float",
+            "unit": "dB",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "The gain auto function automatically adjusts the Auto Gain parameter value within set limits, until a target average gray value for the pixel data is reached.",
+            "enum": [
+            {
+                "featureName": "Once",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Continuous",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "GainAuto",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Setting up automatic gain range of minimum. When the gain is set to auto mode, this function works.",
+            "featureName": "AutoGainMin",
+            "nodeType": "Float",
+            "unit": "dB",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Setting up automatic gain range of maximum. When the gain is set to auto mode, this function works.",
+            "featureName": "AutoGainMax",
+            "nodeType": "Float",
+            "unit": "dB",
+            "value": 16.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Refers to the AWB working environment.",
+            "enum": [
+            {
+                "featureName": "U30",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "D50",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "D75",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Incandescent",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Fluorescence",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "D65",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Adaptive",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "AWBLampHouse",
+            "nodeType": "Enumeration",
+            "value": "Adaptive"
+        }, null,
+        {
+            "accessMode": "RW",
+            "description": "Enables gamma correction.",
+            "featureName": "GammaEnable",
+            "nodeType": "Boolean",
+            "value": true
+        },
+        {
+            "accessMode": "RW",
+            "description": "Sets the type of gamma to apply.",
+            "enum": [
+            {
+                "featureName": "User",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "SRGB",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "GammaMode",
+            "nodeType": "Enumeration",
+            "value": "SRGB"
+        },
+        {
+            "description": "Gamma correction value. Gamma correction lets you modify the brightness of the pixel values to account for a non-linearity in the human perception of brightness.",
+            "featureName": "Gamma",
+            "nodeType": "Float"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects which Black Level is controlled by the various Black Level features.",
+            "enum": [
+            {
+                "featureName": "All",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "BlackLevelSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "All"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Controls the analog black level as an absolute physical value. This represents a DC offset applied to the video signal.",
+            "featureName": "BlackLevel",
+            "nodeType": "Float",
+            "value": 0.0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Value set for digital shift. When the parameter is set to zero, digital shift will be disabled. When the parameter is set to 1, 2, 3, or 4, digital shift will be set to shift by 1, shift by 2, shift by 3, or shift by 4 respectively.",
+            "featureName": "DigitalShift",
+            "nodeType": "Integer",
+            "value": 0
+        }],
+        "description": "This category includes items that used to control the analog characteristics of the video signal.",
+        "featureName": "AnalogControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "This enumeration the lookup table (LUT) to configure. Once a LUT has been selected, all changes to the LUT settings will be applied to the selected LUT.",
+            "enum": [
+            {
+                "featureName": "Luminance",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "LUTSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "Luminance"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value enables the selected lookup table (LUT).",
+            "featureName": "LUTEnable",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RW",
+            "description": "Index of the LUT element to access.",
+            "featureName": "LUTIndex",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "Value of the LUT element at the LUT index position.",
+            "featureName": "LUTValue",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "featureName": "LUTValueAll",
+            "nodeType": "Register"
+        }],
+        "description": "This category includes items used to control the operation of the camera's lookup table (LUT)",
+        "featureName": "LUTControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "description": "Enables color transformation.",
+            "featureName": "ColorTransformationEnable",
+            "nodeType": "Boolean"
+        },
+        {
+            "description": "Sets the type of color transformation to be performed.",
+            "enum": [
+            {
+                "featureName": "RGBtoRGB",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "ColorTransformationMode",
+            "nodeType": "Enumeration"
+        },
+        {
+            "description": "Sets the element to be entered in the color transformation matrix for custom color transformation. Note: Depending on the camera model, some elements in the color transformation matrix may be preset and can not be changed.",
+            "enum": [
+            {
+                "featureName": "Gain22",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain21",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain20",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain12",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain11",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain10",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain02",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain01",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Gain00",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "ColorTransformationValueSelector",
+            "nodeType": "Enumeration"
+        },
+        {
+            "description": "Transformation value for the selected element in the color transformation matrix.",
+            "featureName": "ColorTransformationValue",
+            "nodeType": "Float"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Sets the type of light source to be considered for matrix color transformation.",
+            "enum": [
+            {
+                "featureName": "INCA",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "CoolWhiteFluorescence",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Daylight5000K",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Daylight6500K",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Custom",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "LightSourcePreset",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects a balance ratio control to configuration. Once a balance ratio control has been selected, all changes to the balance ratio settings will be applied to the selected control.",
+            "enum": [
+            {
+                "featureName": "Blue",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Green",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Red",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "BalanceRatioSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "Red"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the selected balance ratio control as a float value.",
+            "featureName": "BalanceRatio",
+            "nodeType": "Float",
+            "value": 2.59375
+        },
+        {
+            "accessMode": "RW",
+            "description": "The automatic white balance is a two-step process: First, the Balance Ratio parameter values for red, green, and blue are each set to 1.0. Then, assuming a 'grey world' model, the Balance Ratio Abs parameter values are adjusted such that the average gray values for the 'red' and 'blue' pixels match the average gray value for the 'green' pixels.",
+            "enum": [
+            {
+                "featureName": "Once",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Continuous",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "BalanceWhiteAuto",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the width of the rect of interest in pixels for Auto WhiteBalance",
+            "featureName": "AWBROIWidth",
+            "nodeType": "Integer",
+            "value": 4200
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the height of the rect of interest in pixels for Auto WhiteBalance",
+            "featureName": "AWBROIHeight",
+            "nodeType": "Integer",
+            "value": 2160
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the X offset (left offset) for the rect of interest in pixels for Auto WhiteBalance",
+            "featureName": "AWBROIOffsetX",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "This value sets the Y offset (top offset) for the rect of interest for Auto WhiteBalance",
+            "featureName": "AWBROIOffsetY",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "SaturationMode",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "featureName": "Saturation",
+            "nodeType": "Integer",
+            "value": 64
+        }],
+        "description": "This category contains the Color Transformation control features.",
+        "featureName": "ColorTransformationControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RO",
+            "description": "Size of images, in bytes, for the current format and size.",
+            "featureName": "PayloadSize",
+            "nodeType": "Integer",
+            "value": 9072000
+        }],
+        "description": "This category includes items that used to control the Transport layer.",
+        "featureName": "TransportLayerControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "This enumeration selects the configuration set to load, save or configure. Possible values for the User Set Selector are: Default: Selects a configuration set that contains factory settings. User Set 1: Selects the first user set. When the Default configuration set is selected and loaded using User Set Load, the device must be in default factory settings state and must make sure the mandatory continuous acquisition use case works directly. Default User Set is read-only and cannot be modified.",
+            "enum": [
+            {
+                "featureName": "UserSet0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Default",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "UserSetSelector",
+            "nodeType": "Enumeration",
+            "value": "Default"
+        },
+        {
+            "accessMode": "WO",
+            "description": "This command loads the selected configuration set from the non-volatile memory in the camera to the volatile memory and makes the selected set the active configuration set. Once the selected set is loaded, the parameters in the selected set will control the camera.",
+            "featureName": "UserSetLoad",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "WO",
+            "description": "This command copies the parameters in the current active configuration set into the selected user set in the camera's non-volatile memory.",
+            "featureName": "UserSetSave",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This enumeration sets the configuration set to be used as the default startup set. The configuration set that has been selected as the default startup set will be loaded as the active set whenever the camera is powered on or reset.",
+            "enum": [
+            {
+                "featureName": "UserSet0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Default",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "UserSetDefault",
+            "nodeType": "Enumeration",
+            "value": "Default"
+        }],
+        "description": "This category includes items that control the configuration sets feature that is used to save sets of parameters in the camera",
+        "featureName": "UserSetControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "This boolean value enables the camera's chunk mode.",
+            "featureName": "ChunkModeActive",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RW",
+            "description": "Selects which Chunk to enable or control.",
+            "enum": [
+            {
+                "featureName": "CounterValue",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Timestamp",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FrameID",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "ChunkSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "FrameID"
+        },
+        {
+            "accessMode": "RW",
+            "description": "This boolean value enables the inclusion of the selected Chunk data in the payload of the image.",
+            "featureName": "ChunkEnable",
+            "nodeType": "Boolean",
+            "value": false
+        },
+        {
+            "accessMode": "RO",
+            "description": "Returns the unique Identifier of the frame (or image) included in the payload.",
+            "featureName": "ChunkFrameID",
+            "nodeType": "Integer",
+            "value": 0
+        },
+        {
+            "accessMode": "RO",
+            "description": "Returns the Timestamp of the image included in the payload at the time of the FrameStart internal event.",
+            "featureName": "ChunkTimestamp",
+            "nodeType": "Integer",
+            "unit": "ns",
+            "value": 0
+        }],
+        "description": "This category includes items that used to control the chunk data features.",
+        "featureName": "ChunkDataControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "Removes the limit of the specific parameter value ranges.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "RemoveParameterLimit",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        }],
+        "description": "This category includes items that used to Remove parameter range restrictions features.",
+        "featureName": "RemoveParameterLimitControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "RW",
+            "description": "Enables the Flat Field Correction.",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "FlatFieldCorrection",
+            "nodeType": "Enumeration",
+            "value": "Off"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "enum": [
+            {
+                "featureName": "TailorFlatFieldCorrection",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "ShadingCorrectionMode",
+            "nodeType": "Enumeration",
+            "value": "TailorFlatFieldCorrection"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "enum": [
+            {
+                "featureName": "BlockSize_16384",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "FFCBlockSize",
+            "nodeType": "Enumeration",
+            "value": "BlockSize_16384"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "featureName": "FFCCoefficientsSize",
+            "nodeType": "Integer",
+            "value": 4344
+        },
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "enum": [
+            {
+                "featureName": "FFCFrameCount_16",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FFCFrameCount_8",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FFCFrameCount_4",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FFCFrameCount_2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "FFCFrameCount_1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "FFCFrameCount",
+            "nodeType": "Enumeration",
+            "value": "FFCFrameCount_4"
+        },
+        {
+            "accessMode": "WO",
+            "description": "N/A",
+            "featureName": "FFCFlashLoad",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "WO",
+            "description": "N/A",
+            "featureName": "FFCFlashSave",
+            "nodeType": "Command"
+        }, null, null, null,
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "featureName": "FFCValueAll",
+            "nodeType": "Register"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "featureName": "FFCLoad",
+            "nodeType": "Register"
+        },
+        {
+            "accessMode": "WO",
+            "description": "N/A",
+            "featureName": "FFCSave",
+            "nodeType": "Register"
+        },
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "enum": [
+            {
+                "featureName": "On",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "Off",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "StaticDefectCorrection",
+            "nodeType": "Enumeration",
+            "value": "On"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "featureName": "StaticDefectCorrectionFinish",
+            "nodeType": "Integer",
+            "value": 1
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "featureName": "StaticDefectCorrectionInfo",
+            "nodeType": "Register"
+        },
+        {
+            "accessMode": "RO",
+            "description": "N/A",
+            "featureName": "ColorCorrectionParam",
+            "nodeType": "Integer",
+            "value": 6564
+        }, null, null, null, null,
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "enum": [
+            {
+                "featureName": "DataField_3",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "DataField_2",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "DataField_1",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            },
+            {
+                "featureName": "DataField_0",
+                "isAvailable": true,
+                "nodeType": "EnumEntry"
+            }],
+            "featureName": "DataFieldSelector",
+            "nodeType": "Enumeration",
+            "options": [],
+            "value": "DataField_0"
+        },
+        {
+            "accessMode": "RW",
+            "description": "N/A",
+            "featureName": "DataFieldValue",
+            "nodeType": "Register"
+        }, null, null],
+        "description": "This category includes items that used to control the image quality features.",
+        "featureName": "ImageQualityControl",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [
+        {
+            "accessMode": "WO",
+            "description": "Resets the device to its power up state.",
+            "featureName": "DeviceReset",
+            "nodeType": "Command"
+        },
+        {
+            "accessMode": "RW",
+            "description": "Test Pending Ack.",
+            "featureName": "TestPendingAck",
+            "nodeType": "Integer",
+            "unit": "ms",
+            "value": 0
+        },
+        {
+            "accessMode": "RO",
+            "children": [
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the Event ID for an event test event.",
+                "featureName": "EventTest",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "RO",
+                "description": "This enumeration value indicates the time stamp for an event test.",
+                "featureName": "EventTestTimestamp",
+                "nodeType": "Integer",
+                "value": 0
+            },
+            {
+                "accessMode": "WO",
+                "description": "Trigger Event Test.",
+                "featureName": "TriggerEventTest",
+                "nodeType": "Command"
+            }],
+            "description": "This category includes items that U3V Event test.",
+            "featureName": "EventTestControl",
+            "nodeType": "Category"
+        }],
+        "description": "This category includes items that U3V test.",
+        "featureName": "U3VTest",
+        "nodeType": "Category"
+    },
+    {
+        "accessMode": "RO",
+        "children": [],
+        "description": "This category includes items that used to control the User Defined features.",
+        "featureName": "CustomFeature",
+        "nodeType": "Category"
+    }],
+    "description": "N/A",
+    "featureName": "Root",
+    "nodeType": "Category"
+}

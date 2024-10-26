@@ -33,6 +33,8 @@
 //	Type value;
 //};
 
+
+
 #include <chrono>
 
 namespace ofxAravis {
@@ -68,6 +70,9 @@ namespace ofxAravis {
     class Grabber{
         public:
             using Clock = std::chrono::high_resolution_clock;
+            using BufferCallback = std::function<void(const cv::Mat&)>;
+            void setBufferCallback(BufferCallback callback);
+            BufferCallback bufferCallback; // Store the callback function
 
             Grabber();
             ~Grabber();
@@ -135,6 +140,8 @@ namespace ofxAravis {
         
             // ------- FEATURES -------
         
+            ofJson listAllFeatures();
+        
             void setFeatureString( std::string key, std::string value );
             std::string getFeatureString( std::string key );
         
@@ -146,6 +153,8 @@ namespace ofxAravis {
             
             void setFeatureFloat( std::string key, int value );
             float getFeatureFloat( std::string key );
+        
+            void executeCommand( std::string command );
         
             // ------- FPS -------
 
@@ -174,6 +183,11 @@ namespace ofxAravis {
         private:
             static void onNewBuffer(ArvStream * stream, Grabber * aravis);
             void setPixels(cv::Mat& mat);
+
+            std::string safeConvertChars( const char * chars );
+
+            void loopThroughFeatures( ofJson & features, ArvGc * genicam, const char * feature, int level );
+            void processFeatureNode( ofJson & entry, ArvGcFeatureNode * node, int level );
             
             Device info;
             vector<std::string> formats;
