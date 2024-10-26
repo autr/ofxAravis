@@ -5,4 +5,11 @@ Makefile
 bin
 config.make
 .DS_Store
-of.entitlements
+of.entitlements*.qbs.user
+*.qbs
+bind/*.app
+openFrameworks-Info.plist
+.DS_Store,
+config.make,
+Makefile,
+.AppleDouble,
