@@ -13,3 +13,6 @@ openFrameworks-Info.plist
 config.make,
 Makefile,
 .AppleDouble,
+*.qbs.user
+bind/*.app
+bin,
